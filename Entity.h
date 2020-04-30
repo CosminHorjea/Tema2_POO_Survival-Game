@@ -6,13 +6,13 @@ using namespace std;
 
 class Entity
 {
-	string name;
-	pair<int, int> position;
+	const string name;
+	const pair<int, int> position;
 
 public:
-	Entity(string, pair<int, int>);
+	Entity(const string, pair<int, int>);
 	void setPosition();
-	void getPosition();
+	pair<int, int> getPosition() const { return this->position; };
 	virtual string getEntityType() const = 0;
-	virtual ~Entity(){};
+	virtual ~Entity() = 0;
 };

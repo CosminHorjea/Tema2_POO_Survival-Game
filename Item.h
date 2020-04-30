@@ -3,4 +3,6 @@
 
 class Item : public Entity
 {
+public:
+	virtual string getItemType();
 };

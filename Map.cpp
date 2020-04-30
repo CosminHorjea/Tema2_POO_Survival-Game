@@ -1,4 +1,5 @@
 #include <iostream>
+#include <utility>
 #include "Entity.h"
 #include "Engine.h"
 
@@ -16,7 +17,11 @@ Map::Map(int w, int h) : columns(w), rows(h)
 		entities_map.push_back(row);
 	}
 }
-
+void Map::add_entity(Entity *e)
+{
+	this->entities.push_back(e);
+	this->entities_map[e->getPosition().first][e->getPosition().second] = e;
+}
 ostream &operator<<(ostream &out, Map &m)
 {
 	for (int i = 0; i < m.rows; i++)
@@ -24,10 +29,11 @@ ostream &operator<<(ostream &out, Map &m)
 		for (int j = 0; j < m.columns; j++)
 		{
 			if (m.entities_map[i][j])
-				cout << m.entities_map[i][j] << " ";
+				cout << m.entities_map[i][j]->getEntityType() << " ";
 			else
 			{
 				cout << " ";
+				// m.entities_map[i][j]->getEntityType();
 			}
 		}
 		cout << endl;
