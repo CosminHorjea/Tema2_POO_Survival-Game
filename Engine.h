@@ -10,5 +10,6 @@ public:
 	void playRound();
 	void printGame();
 	void initializeAgents(Map &);
+	void initializeItems(Map &);
 	~Game() { delete map; };
 };

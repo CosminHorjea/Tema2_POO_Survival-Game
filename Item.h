@@ -3,6 +3,11 @@
 
 class Item : public Entity
 {
+	int bonusAttack, bonusHealth;
+
 public:
-	virtual string getItemType();
+	Item(string, pair<int, int>, int, int);
+	string getEntityType() const { return "Item"; };
+	virtual string getItemType() = 0;
+	virtual ~Item() = 0;
 };
