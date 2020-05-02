@@ -80,19 +80,31 @@ void Map::moveAgents()
 }
 ostream &operator<<(ostream &out, Map &m)
 {
+	cout << endl;
+	for (int i = 0; i <= m.columns + 1; i++)
+	{
+		cout << "-";
+	}
+	cout << endl;
 	for (int i = 0; i < m.rows; i++)
 	{
+		cout << "|";
 		for (int j = 0; j < m.columns; j++)
 		{
 			if (m.entities_map[i][j])
-				cout << m.entities_map[i][j]->getEntityChar() << " ";
+				cout << m.entities_map[i][j]->getEntityChar();
 			else
 			{
 				cout << " ";
 			}
 		}
-		cout << endl;
+		cout << "|" << endl;
 	}
+	for (int i = 0; i <= m.columns + 1; i++)
+	{
+		cout << "-";
+	}
+	cout << endl;
 }
 int Map::getRows() const
 {

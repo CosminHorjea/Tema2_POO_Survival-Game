@@ -41,6 +41,7 @@ void Game::initializeAgents(Map &m)
 {
 	for (int i = 0; i < 21; i++)
 	{
+		// cout << "Making agents";
 		switch (i % 3)
 		{
 		case 1:
