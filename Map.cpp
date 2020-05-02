@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "Engine.h"
 #include "Agent.h"
+#include "Item.h"
 
 using namespace std;
 
@@ -34,23 +35,36 @@ void Map::remove_entity(Entity *e)
 }
 void Map::moveAgent(Agent *a, pair<int, int> new_position)
 {
-	// if (entities_map[new_position.first][new_position.second] != NULL)
-	// {
-	// 	if (entities_map[new_position.first][new_position.second]->getEntityType() == "Agent")
-	// 	{
-	// 		//TODO beginCombat()
-	// 	}
-	// 	else
-	// 	{
-	// 		//TODO enhanceAgent()
-	// 	}
-	// }
-	// else
+	Entity *location = entities_map[new_position.first][new_position.second];
+	if (location != NULL)
 	{
-		entities_map[a->getPosition().first][a->getPosition().second] = NULL;
-		entities_map[new_position.first][new_position.second] = a;
-		a->setPosition(new_position);
+		if (location->getEntityType() == "Agent")
+		{
+			//TODO beginCombat()
+			Agent *otherAgent = dynamic_cast<Agent *>(location);
+			Agent *winner = fight(a, otherAgent);
+			if (winner == a)
+			{
+				entities.erase(entities.find(otherAgent));
+			}
+			else
+			{
+				entities.erase(entities.find(a));
+				return; // nu vreau sa-l mai mut daca pierde
+			}
+		}
+		else
+		{
+			//TODO enhanceAgent()
+			Item *foundItem = dynamic_cast<Item *>(location);
+			a->equipItem(foundItem);
+			entities.erase(entities.find(foundItem));
+		}
 	}
+
+	entities_map[a->getPosition().first][a->getPosition().second] = NULL;
+	entities_map[new_position.first][new_position.second] = a;
+	a->setPosition(new_position);
 }
 void Map::moveAgents()
 {
@@ -71,7 +85,7 @@ ostream &operator<<(ostream &out, Map &m)
 		for (int j = 0; j < m.columns; j++)
 		{
 			if (m.entities_map[i][j])
-				cout << m.entities_map[i][j]->getEntityType() << " ";
+				cout << m.entities_map[i][j]->getEntityChar() << " ";
 			else
 			{
 				cout << " ";
