@@ -35,9 +35,12 @@ void Map::remove_entity(Entity *e)
 }
 void Map::moveAgent(Agent *a, pair<int, int> new_position)
 {
+	if(deadAgents.find(a)!=deadAgents.end()){
+		return;
+	}
 	Entity *location = entities_map[new_position.first][new_position.second];
 	if (location != NULL)
-	{
+	{	
 		if (location->getEntityType() == "Agent")
 		{
 			//TODO beginCombat()
@@ -45,11 +48,14 @@ void Map::moveAgent(Agent *a, pair<int, int> new_position)
 			Agent *winner = fight(a, otherAgent);
 			if (winner == a)
 			{
-				entities.erase(entities.find(otherAgent));
+				// entities.erase(entities.find(otherAgent));
+				deadAgents.insert(otherAgent);
 			}
 			else
 			{
-				entities.erase(entities.find(a));
+				// entities.erase(entities.find(a));
+				deadAgents.insert(a);
+				entities_map[a->getPosition().first][a->getPosition().second]=NULL;
 				return; // nu vreau sa-l mai mut daca pierde
 			}
 		}
@@ -58,10 +64,11 @@ void Map::moveAgent(Agent *a, pair<int, int> new_position)
 			//TODO enhanceAgent()
 			Item *foundItem = dynamic_cast<Item *>(location);
 			a->equipItem(foundItem);
-			entities.erase(entities.find(foundItem));
+			entities_map[foundItem->getPosition().first][foundItem->getPosition().second];
+			// entities.erase(entities.find(foundItem));
+			itemsTaken.insert(foundItem);
 		}
 	}
-
 	entities_map[a->getPosition().first][a->getPosition().second] = NULL;
 	entities_map[new_position.first][new_position.second] = a;
 	a->setPosition(new_position);
@@ -69,6 +76,7 @@ void Map::moveAgent(Agent *a, pair<int, int> new_position)
 void Map::moveAgents()
 {
 	for (Entity *e : entities)
+	// for(set<Entity*>::iterator e = entities.begin();e!=entities.end();++e)
 	{
 		if (e->getEntityType() == "Agent")
 		{
@@ -77,9 +85,40 @@ void Map::moveAgents()
 			moveAgent(aux, aux->chooseNextPosition(*this));
 		}
 	}
+	for(Agent* a : deadAgents){
+		entities.erase(a);
+	}
+	for(Item* i : itemsTaken){
+		entities.erase(i);
+	}
+	deadAgents.clear();
+	itemsTaken.clear();
+	this->clearMap();
+	for(Entity* e : entities){
+		this->add_entity(e);
+	}
 }
+
+void Map::clearMap(){
+	entities_map.clear();
+	for (int i = 0; i < columns; i++)
+	{
+		vector<Entity *> row;
+		for (int j = 0; j < rows; j++)
+		{
+			row.push_back(NULL);
+		}
+		entities_map.push_back(row);
+	}
+}
+
+vector<Entity*> Map::operator[](int i){
+	return entities_map[i];
+}
+
 ostream &operator<<(ostream &out, Map &m)
 {
+	cout<<m.entities.size();
 	cout << endl;
 	for (int i = 0; i <= m.columns + 1; i++)
 	{
@@ -105,6 +144,7 @@ ostream &operator<<(ostream &out, Map &m)
 		cout << "-";
 	}
 	cout << endl;
+	return out;
 }
 int Map::getRows() const
 {

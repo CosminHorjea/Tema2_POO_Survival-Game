@@ -14,7 +14,7 @@ Agent::~Agent()
 
 Agent *fight(Agent *player_one, Agent *player_two)
 {
-	while (player_one->health > 0 && player_two->health > 0)
+	while ((player_one->health > 0) && (player_two->health > 0))
 	{
 		player_two->health -= player_one->attack;
 		if (player_two->health <= 0)

@@ -31,8 +31,8 @@ Game::Game()
 			TODO map.muta_agenti();
 			TODO maybe mapa.drop_items();
 		*/
-		map->moveAgents();
 		cin >> response;
+		map->moveAgents();
 		if (response == 'N')
 			done = 1;
 	}

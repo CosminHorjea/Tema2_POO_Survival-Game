@@ -12,10 +12,11 @@ class Map;
 class Item;
 class Agent : public Entity
 {
-	int attack, health, agility, radius;
+	int attack, health, agility;
 
 protected:
 	vector<pair<int, int>> possibleMoves;
+	int radius,prefPossition=0;
 
 public:
 	Agent(const string nume, const pair<int, int> position, int health, int attack, int agility, int radius) : Entity(nume, position)
