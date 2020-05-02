@@ -13,19 +13,17 @@ class Item;
 class Agent : public Entity
 {
 	int attack, health, agility, radius;
+
+protected:
 	vector<pair<int, int>> possibleMoves;
 
 public:
-	Agent(const string nume, const pair<int, int> position, int health, int attack, int agility, int radius, const vector<pair<int, int>> *posMoves) : Entity(nume, position)
+	Agent(const string nume, const pair<int, int> position, int health, int attack, int agility, int radius) : Entity(nume, position)
 	{
 		this->attack = attack;
 		this->health = health;
 		this->agility = agility;
 		this->radius = radius;
-		std::cout << "Maybe here\n";
-		// cout << posMoves[1].first;
-		this->possibleMoves.assign(posMoves->begin(), posMoves->end());
-		// std::cout << "Maybe here\n";
 	};
 	virtual pair<int, int> chooseNextPosition(Map &) const = 0;
 	string getEntityType() const { return "Agent"; }
