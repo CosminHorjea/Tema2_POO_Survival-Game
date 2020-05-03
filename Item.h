@@ -1,5 +1,4 @@
 #pragma once
-#include "Entity.h"
 #include "Agent.h"
 
 class Agent;

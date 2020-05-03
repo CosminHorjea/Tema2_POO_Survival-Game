@@ -2,7 +2,6 @@
 #include <iostream>
 #include <vector>
 #include <utility>
-#include "Entity.h"
 #include "Map.h"
 #include "Item.h"
 
@@ -26,7 +25,7 @@ public:
 		this->agility = agility;
 		this->radius = radius;
 	};
-	virtual pair<int, int> chooseNextPosition(Map &) const = 0;
+	virtual pair<int, int> chooseNextPosition(Map &) = 0;
 	string getEntityType() const { return "Agent"; }
 	void equipItem(Item *);
 	virtual string getAgentType() = 0;

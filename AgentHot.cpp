@@ -1,6 +1,6 @@
-#include "AgentAsasin.h"
-// #include "Map.h"
-pair<int, int> Asasin::chooseNextPosition(Map &m) 
+#include "AgentHot.h"
+
+pair<int, int> Thief::chooseNextPosition(Map &m) 
 {
 	pair<int, int> position = this->getPosition();
 	int startX = (position.first - radius) < 0 ? 0 : position.first-radius;
@@ -11,7 +11,7 @@ pair<int, int> Asasin::chooseNextPosition(Map &m)
 	for(int i=startY;i<=endY;i++){
 		for(int j = startX;j<=endX;j++){
 			if(m[i][j]!=NULL ){
-				if( m[i][j]->getEntityType()=="Agent")
+				if( m[i][j]->getEntityType()=="Item")
 					return{i,j};
 			}
 			// cout<<m[i][j]<<" ";
@@ -21,7 +21,7 @@ pair<int, int> Asasin::chooseNextPosition(Map &m)
 	while(!ok){
 		int nextX = position.first+moves[prefferedMove].first;
 		int nextY = position.second+moves[prefferedMove].second;
-		if((nextX>0 &&nextX<m.getRows()) && (nextY>0 && nextY<m.getColumns())){
+		if((nextX>0 &&nextX<m.getRows()) &&0+ (nextY>0 && nextY<m.getColumns())){
 			return {nextX,nextY};
 		}
 		prefferedMove++;
@@ -31,4 +31,4 @@ pair<int, int> Asasin::chooseNextPosition(Map &m)
 	
 }
 
-Asasin::~Asasin() {}
+Thief::~Thief() {}

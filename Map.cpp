@@ -1,9 +1,9 @@
 #include <iostream>
 #include <utility>
-#include "Entity.h"
-#include "Engine.h"
-#include "Agent.h"
-#include "Item.h"
+#include "Map.h"
+// #include "Engine.h"
+// #include "Agent.h"
+// #include "Item.h"
 
 using namespace std;
 
@@ -50,12 +50,14 @@ void Map::moveAgent(Agent *a, pair<int, int> new_position)
 			{
 				// entities.erase(entities.find(otherAgent));
 				deadAgents.insert(otherAgent);
+				cout<<endl<<"Agentul "<<otherAgent->getName()<<" a murit!";
 			}
 			else
 			{
 				// entities.erase(entities.find(a));
 				deadAgents.insert(a);
 				entities_map[a->getPosition().first][a->getPosition().second]=NULL;
+				cout<<endl<<"Agentul "<<a->getName()<<" a murit!";
 				return; // nu vreau sa-l mai mut daca pierde
 			}
 		}
@@ -67,11 +69,13 @@ void Map::moveAgent(Agent *a, pair<int, int> new_position)
 			entities_map[foundItem->getPosition().first][foundItem->getPosition().second];
 			// entities.erase(entities.find(foundItem));
 			itemsTaken.insert(foundItem);
+			cout<<endl<<a->getName()<<"A luat itemul "<< foundItem->getName();
 		}
 	}
 	entities_map[a->getPosition().first][a->getPosition().second] = NULL;
 	entities_map[new_position.first][new_position.second] = a;
 	a->setPosition(new_position);
+	cout<<endl<<a->getName()<<" s-a mutat pe "<<new_position.first<<" "<<new_position.second;
 }
 void Map::moveAgents()
 {

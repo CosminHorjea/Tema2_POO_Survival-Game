@@ -1,5 +1,14 @@
 #pragma once
 #include "Map.h"
+#include "Entity.h"
+#include "Agent.h"
+#include "AgentAsasin.h"
+#include "AgentHot.h"
+#include "Item.h"
+#include "Medkit.h"
+#include "functii.h"
+
+
 class Game
 {
 	Map *map;

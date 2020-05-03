@@ -1,8 +1,11 @@
-#include "Entity.h"
 #include <iostream>
-#include <utility>
+#include "Entity.h"
 
 Entity::Entity(const string nume, const pair<int, int> pozitie) : name(nume), position(pozitie){};
+
+string Entity::getName(){
+	return this->name;
+}
 
 Entity::~Entity()
 {

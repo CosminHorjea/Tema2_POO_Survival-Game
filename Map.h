@@ -1,9 +1,9 @@
 #pragma once
+#include <set>
+#include <vector>
 #include "Entity.h"
 #include "Agent.h"
 #include "Item.h"
-#include <set>
-#include <vector>
 
 class Entity;
 class Agent;

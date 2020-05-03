@@ -1,12 +1,7 @@
 #include <iostream>
 #include <utility>
-#include "utility.h"
 #include "Engine.h"
-#include "AgentAsasin.h"
-#include "Entity.h"
-#include "Agent.h"
-#include "Item.h"
-#include "Medkit.h"
+
 
 using namespace std;
 
@@ -45,10 +40,11 @@ void Game::initializeAgents(Map &m)
 		switch (i % 3)
 		{
 		case 1:
-			m.add_entity(new Asasin("Duncan", {randInt(1, m.getRows()), randInt(1, m.getColumns())}));
+			m.add_entity(new Asasin(randName(), {randInt(1, m.getRows()), randInt(1, m.getColumns())}));
 			break;
-			// case 2:
-			// 	m.add_entity(new Agent);
+		case 2:
+			m.add_entity(new Thief(randName(),{randInt(1, m.getRows()), randInt(1, m.getColumns())}));
+			break;
 			// case 3:
 			// 	m.add_entity(new Agent);
 		}
