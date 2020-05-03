@@ -7,7 +7,6 @@
 class Thief : public Agent
 {
 	const vector<pair<int, int>> moves = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-	int prefferedMove=0;
 
 public:
 	Thief(const string name, pair<int, int> position) : Agent(name, position, 130, 20, 1, 1)
@@ -15,7 +14,7 @@ public:
 		this->Agent::possibleMoves = moves;
 	}
 	string getAgentType() { return "Thief"; }
-	pair<int, int> chooseNextPosition(Map &) ;
+	pair<int, int> chooseNextPosition(Map &);
 	char getEntityChar() const { return 'T'; };
 	~Thief();
 };

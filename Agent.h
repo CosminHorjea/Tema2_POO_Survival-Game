@@ -15,7 +15,7 @@ class Agent : public Entity
 
 protected:
 	vector<pair<int, int>> possibleMoves;
-	int radius,prefPossition=0;
+	int radius, prefMove = 0;
 
 public:
 	Agent(const string nume, const pair<int, int> position, int health, int attack, int agility, int radius) : Entity(nume, position)
@@ -28,6 +28,8 @@ public:
 	virtual pair<int, int> chooseNextPosition(Map &) = 0;
 	string getEntityType() const { return "Agent"; }
 	void equipItem(Item *);
+	vector<Entity *> getNearEntities(Map &);
+	pair<int, int> basicNextPosition(Map &);
 	virtual string getAgentType() = 0;
 	virtual char getEntityChar() const = 0;
 	virtual ~Agent() = 0;

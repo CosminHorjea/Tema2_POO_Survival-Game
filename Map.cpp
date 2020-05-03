@@ -28,59 +28,61 @@ void Map::remove_entity(Entity *e)
 {
 	if (entities.find(e) == entities.end())
 	{
-		throw - 1; //TODO exceptie pt element care nu e in vector
+		throw - 1;
 	}
 	entities_map[e->getPosition().first][e->getPosition().second] = NULL;
 	entities.erase(entities.find(e));
 }
 void Map::moveAgent(Agent *a, pair<int, int> new_position)
 {
-	if(deadAgents.find(a)!=deadAgents.end()){
+	if (deadAgents.find(a) != deadAgents.end())
+	{
 		return;
 	}
 	Entity *location = entities_map[new_position.first][new_position.second];
 	if (location != NULL)
-	{	
+	{
 		if (location->getEntityType() == "Agent")
 		{
-			//TODO beginCombat()
 			Agent *otherAgent = dynamic_cast<Agent *>(location);
 			Agent *winner = fight(a, otherAgent);
 			if (winner == a)
 			{
 				// entities.erase(entities.find(otherAgent));
 				deadAgents.insert(otherAgent);
-				cout<<endl<<"Agentul "<<otherAgent->getName()<<" a murit!";
+				cout << endl
+					 << "Agentul " << otherAgent->getName() << " a murit!";
 			}
 			else
 			{
 				// entities.erase(entities.find(a));
 				deadAgents.insert(a);
-				entities_map[a->getPosition().first][a->getPosition().second]=NULL;
-				cout<<endl<<"Agentul "<<a->getName()<<" a murit!";
+				entities_map[a->getPosition().first][a->getPosition().second] = NULL;
+				cout << endl
+					 << "Agentul " << a->getName() << " a murit!";
 				return; // nu vreau sa-l mai mut daca pierde
 			}
 		}
 		else
 		{
-			//TODO enhanceAgent()
 			Item *foundItem = dynamic_cast<Item *>(location);
 			a->equipItem(foundItem);
 			entities_map[foundItem->getPosition().first][foundItem->getPosition().second];
 			// entities.erase(entities.find(foundItem));
 			itemsTaken.insert(foundItem);
-			cout<<endl<<a->getName()<<"A luat itemul "<< foundItem->getName();
+			cout << endl
+				 << a->getName() << "A luat itemul " << foundItem->getName();
 		}
 	}
 	entities_map[a->getPosition().first][a->getPosition().second] = NULL;
 	entities_map[new_position.first][new_position.second] = a;
 	a->setPosition(new_position);
-	cout<<endl<<a->getName()<<" s-a mutat pe "<<new_position.first<<" "<<new_position.second;
+	cout << endl
+		 << a->getName() << " s-a mutat pe " << new_position.first << " " << new_position.second;
 }
 void Map::moveAgents()
 {
 	for (Entity *e : entities)
-	// for(set<Entity*>::iterator e = entities.begin();e!=entities.end();++e)
 	{
 		if (e->getEntityType() == "Agent")
 		{
@@ -89,23 +91,27 @@ void Map::moveAgents()
 			moveAgent(aux, aux->chooseNextPosition(*this));
 		}
 	}
-	for(Agent* a : deadAgents){
+	for (Agent *a : deadAgents)
+	{
 		entities.erase(a);
 		delete a;
 	}
-	for(Item* i : itemsTaken){
+	for (Item *i : itemsTaken)
+	{
 		entities.erase(i);
 		delete i;
 	}
 	deadAgents.clear();
 	itemsTaken.clear();
 	this->clearMap();
-	for(Entity* e : entities){
+	for (Entity *e : entities)
+	{
 		this->add_entity(e);
 	}
 }
 
-void Map::clearMap(){
+void Map::clearMap()
+{
 	entities_map.clear();
 	for (int i = 0; i < columns; i++)
 	{
@@ -118,13 +124,14 @@ void Map::clearMap(){
 	}
 }
 
-vector<Entity*> Map::operator[](int i){
+vector<Entity *> Map::operator[](int i)
+{
 	return entities_map[i];
 }
 
 ostream &operator<<(ostream &out, Map &m)
 {
-	cout<<m.entities.size();
+	cout << m.entities.size();
 	cout << endl;
 	for (int i = 0; i <= m.columns + 1; i++)
 	{

@@ -7,7 +7,6 @@
 class Brawler : public Agent
 {
 	const vector<pair<int, int>> moves = {{1, 1}, {-1, -1}, {-1, 1}, {1, -1}};
-	int prefferedMove=0;
 
 public:
 	Brawler(const string name, pair<int, int> position) : Agent(name, position, 200, 30, 0, 1)
@@ -15,7 +14,7 @@ public:
 		this->Agent::possibleMoves = moves;
 	}
 	string getAgentType() { return "Brawler"; }
-	pair<int, int> chooseNextPosition(Map &) ;
+	pair<int, int> chooseNextPosition(Map &);
 	char getEntityChar() const { return 'B'; };
 	~Brawler();
 };
