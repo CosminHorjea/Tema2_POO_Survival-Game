@@ -19,7 +19,7 @@ class Map
 
 public:
 	Map(int, int);
-	~Map(){};
+	~Map();
 	int getColumns() const;
 	int getRows() const;
 	void add_entity(Entity *);

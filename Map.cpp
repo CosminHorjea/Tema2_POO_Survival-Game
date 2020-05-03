@@ -207,3 +207,12 @@ int Map::getColumns() const
 {
 	return this->columns;
 };
+
+Map::~Map()
+{
+	this->clearMap();
+	for (Entity *e : entities)
+	{
+		delete e;
+	}
+}
