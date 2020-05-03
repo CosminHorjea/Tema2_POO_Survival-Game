@@ -14,8 +14,8 @@ class Agent : public Entity
 	int attack, health, agility;
 
 protected:
-	vector<pair<int, int>> possibleMoves;
-	int radius, prefMove = 0;
+	vector<pair<int, int>> possibleMoves; // un vector de miscari posibile
+	int radius, prefMove = 0;			  // raza de actiune si indicele miscarii favorite din possibleMoves
 
 public:
 	Agent(const string nume, const pair<int, int> position, int health, int attack, int agility, int radius) : Entity(nume, position)
@@ -30,7 +30,6 @@ public:
 	void equipItem(Item *);
 	vector<Entity *> getNearEntities(Map &) const;
 	pair<int, int> basicNextPosition(Map &);
-	virtual string getAgentType() = 0;
 	virtual char getEntityChar() const = 0;
 	virtual ~Agent() = 0;
 

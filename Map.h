@@ -10,10 +10,10 @@ class Agent;
 class Item;
 class Map
 {
-	vector<vector<Entity *>> entities_map;
+	vector<vector<Entity *>> entities_map; //mapa cu pinteri catre entitati
 	set<Entity *> entities;
-	set<Agent *> deadAgents;
-	set<Item *> itemsTaken;
+	set<Agent *> deadAgents; //folosit pentru agentii scosi din joc
+	set<Item *> itemsTaken;	 // folosit pentru  itemele deja luate
 	const int columns;
 	const int rows;
 

@@ -5,13 +5,12 @@ class Agent;
 
 class Item : public Entity
 {
-	int bonusAttack, bonusHealth,bonusAgility;
+	int bonusAttack, bonusHealth, bonusAgility;
 
 public:
-	Item(string, pair<int, int>, int, int,int);
+	Item(string, pair<int, int>, int, int, int);
 	string getEntityType() const { return "Item"; };
-	virtual string getItemType() = 0;
-	virtual char getEntityChar() const = 0;
+	virtual char getEntityChar() const = 0; // caracterul reprezentativ pentru fiecare entitate
 	virtual ~Item() = 0;
 
 	friend Agent;

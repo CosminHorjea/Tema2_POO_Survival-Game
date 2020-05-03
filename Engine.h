@@ -10,19 +10,15 @@
 #include "Stone.h"
 #include "Cloak.h"
 
-
 class Game
 {
 	Map *map;
-	static int roundNumber;
 
 public:
 	Game();
-	void playRound();
-	void printGame();
 	void initializeAgents(Map &);
 	void initializeItems(Map &);
 	string randName();
-	int randInt(int,int);
+	int randInt(int, int);
 	~Game() { delete map; };
 };

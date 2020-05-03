@@ -11,9 +11,9 @@ class Brawler : public Agent
 public:
 	Brawler(const string name, pair<int, int> position) : Agent(name, position, 200, 30, 0, 1)
 	{
+		// un Brawler are 200-viata; 20-attack, 0- agilitate si 1- raza de actiune
 		this->Agent::possibleMoves = moves;
 	}
-	string getAgentType() { return "Brawler"; }
 	pair<int, int> chooseNextPosition(Map &);
 	char getEntityChar() const { return 'B'; };
 	~Brawler();
