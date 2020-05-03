@@ -13,42 +13,37 @@ Game::Game()
 	char response;
 	cout << "Introduceti marimea hartii: ";
 	// cin >> n;
-	n = 15;
+	n = n<15 ? 15 : n;
+	n = 20;
 	map = new Map(n, n);
 	initializeAgents(*map);
-	//TODO:
-	//		-> map.place items()
-	//      -> map.place Agents()
 	initializeItems(*map);
 	while (!done) //game loop
 	{
 		cout << *map;
 		cout << "Doriti sa rulati o noua runda (Y)es/(N)o: ";
-		/*
-			TODO map.muta_agenti();
-			TODO maybe mapa.drop_items();
-		*/
 		cin >> response;
-		map->moveAgents();
-		if (response == 'N')
+		if (response == 'N'){
 			done = 1;
+			break;
+		}
+		map->moveAgents();
 	}
 }
 void Game::initializeAgents(Map &m)
 {
 	for (int i = 0; i < 21; i++)
 	{
-		// cout << "Making agents";
 		switch (i % 3)
 		{
 		case 1:
-			m.add_entity(new Asasin(randName(), {randInt(1, m.getRows()), randInt(1, m.getColumns())}));
+			m.add_entity(new Asasin(randName(), {randInt(0, m.getRows()), randInt(0, m.getColumns())}));
 			break;
 		case 2:
-			m.add_entity(new Thief(randName(),{randInt(1, m.getRows()), randInt(1, m.getColumns())}));
+			m.add_entity(new Thief(randName(),{randInt(0, m.getRows()), randInt(0, m.getColumns())}));
 			break;
 		case 0:
-			m.add_entity(new Brawler(randName(),{randInt(1,m.getRows()) , randInt(1,m.getColumns())}));
+			m.add_entity(new Brawler(randName(),{randInt(0,m.getRows()) , randInt(0,m.getColumns())}));
 			break;
 		}
 	}
@@ -65,8 +60,10 @@ void Game::initializeItems(Map &m)
 			break;
 			case 2:
 				m.add_entity(new Stone("Piatra Fermecata", {this->randInt(1, m.getRows()), this->randInt(1, m.getColumns())}));
+			break;
 			case 3:
 				m.add_entity(new Cloak("Mantia Agilitatii", {this->randInt(1, m.getRows()), this->randInt(1, m.getColumns())}));
+			break;
 		}
 	}
 }

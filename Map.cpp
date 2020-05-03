@@ -91,9 +91,11 @@ void Map::moveAgents()
 	}
 	for(Agent* a : deadAgents){
 		entities.erase(a);
+		delete a;
 	}
 	for(Item* i : itemsTaken){
 		entities.erase(i);
+		delete i;
 	}
 	deadAgents.clear();
 	itemsTaken.clear();

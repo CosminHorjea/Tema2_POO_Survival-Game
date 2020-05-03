@@ -7,8 +7,8 @@ pair<int, int> Brawler::chooseNextPosition(Map &m)
 	int endX = (position.first +radius) >= m.getColumns() ? m.getColumns()-1 : position.first+radius;
 	int startY = (position.second -radius) < 0 ? 0 :position.second-radius;
 	int endY = (position.second + radius) >= m.getRows() ? m.getRows()-1: position.second+radius; 
-	for(int i=startY;i<=endY;i++){
-		for(int j = startX;j<=endX;j++){
+	for(int i=startX;i<=endX;i++){
+		for(int j = startY;j<=endY;j++){
 			if(m[i][j]!=NULL ){
 				if( m[i][j]->getEntityType()=="Agent" && m[i][j]!=this)
 					return{i,j};
@@ -19,7 +19,7 @@ pair<int, int> Brawler::chooseNextPosition(Map &m)
 	while(!ok){
 		int nextX = position.first+moves[prefferedMove].first;
 		int nextY = position.second+moves[prefferedMove].second;
-		if((nextX>0 &&nextX<m.getRows()) &&0+ (nextY>0 && nextY<m.getColumns())){
+		if((nextX>0 &&nextX<m.getRows()) && (nextY>0 && nextY<m.getColumns())){
 			return {nextX,nextY};
 		}
 		prefferedMove++;
