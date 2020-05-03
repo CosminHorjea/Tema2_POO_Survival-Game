@@ -124,14 +124,14 @@ void Map::clearMap()
 	}
 }
 
-vector<Entity *> Map::operator[](int i)
+vector<Entity *> Map::operator[](int i) const
 {
 	return entities_map[i];
 }
 
 ostream &operator<<(ostream &out, Map &m)
 {
-	cout << m.entities.size();
+	// cout << m.entities.size();
 	cout << endl;
 	for (int i = 0; i <= m.columns + 1; i++)
 	{
@@ -158,6 +158,18 @@ ostream &operator<<(ostream &out, Map &m)
 	}
 	cout << endl;
 	return out;
+}
+int Map::getNoOfAliveAgents() const
+{
+	int numberAliveAgents = 0;
+	for (Entity *e : entities)
+	{
+		if (e->getEntityType() == "Agent")
+		{
+			numberAliveAgents++;
+		}
+	}
+	return numberAliveAgents;
 }
 int Map::getRows() const
 {

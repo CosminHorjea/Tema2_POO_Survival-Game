@@ -23,15 +23,15 @@ Agent *fight(Agent *player_one, Agent *player_two)
 	}
 	return player_two;
 }
-vector<Entity *> Agent::getNearEntities(Map &m)
+vector<Entity *> Agent::getNearEntities(Map &m) const
 {
 
 	vector<Entity *> neighbours;
 	pair<int, int> position = this->getPosition();
-	int startX = (position.first - radius) < 0 ? 0 : position.first - radius;
-	int endX = (position.first + radius) >= m.getColumns() ? m.getColumns() - 1 : position.first + radius;
-	int startY = (position.second - radius) < 0 ? 0 : position.second - radius;
-	int endY = (position.second + radius) >= m.getRows() ? m.getRows() - 1 : position.second + radius;
+	int startX = (position.first - radius) < 0 ? 0 : (position.first - radius);
+	int endX = (position.first + radius) >= m.getColumns() ? m.getColumns() - 1 : (position.first + radius);
+	int startY = (position.second - radius) < 0 ? 0 : (position.second - radius);
+	int endY = (position.second + radius) >= m.getRows() ? m.getRows() - 1 : (position.second + radius);
 	// cout<<endl<<startX<<" "<<startY<<" "<<endX<<" "<<endY;
 	for (int i = startY; i <= endY; i++)
 	{

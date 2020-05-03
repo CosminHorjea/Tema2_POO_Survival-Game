@@ -28,7 +28,7 @@ public:
 	virtual pair<int, int> chooseNextPosition(Map &) = 0;
 	string getEntityType() const { return "Agent"; }
 	void equipItem(Item *);
-	vector<Entity *> getNearEntities(Map &);
+	vector<Entity *> getNearEntities(Map &) const;
 	pair<int, int> basicNextPosition(Map &);
 	virtual string getAgentType() = 0;
 	virtual char getEntityChar() const = 0;

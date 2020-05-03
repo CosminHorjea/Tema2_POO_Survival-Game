@@ -28,7 +28,8 @@ public:
 	void moveAgent(Agent *, pair<int, int>);
 	void moveAgents();
 	void clearMap();
-	vector<Entity*> operator[](int i);
+	int getNoOfAliveAgents() const;
+	vector<Entity *> operator[](int i) const;
 	friend ostream &operator<<(ostream &, Map &);
 	friend Entity;
 };

@@ -8,7 +8,7 @@ using namespace std;
 
 Game::Game()
 {
-	int n, done = 0;
+	int n, done = 0, ROUND = 0;
 	char response;
 	cout << "Introduceti marimea hartii: ";
 	cin >> n;
@@ -19,7 +19,14 @@ Game::Game()
 	initializeItems(*map);
 	while (!done) //game loop
 	{
+		cout << "\nRunda: " << ROUND << endl;
 		cout << *map;
+		if (map->getNoOfAliveAgents() == 1)
+		{
+			cout << endl
+				 << "Game OVER!" << endl;
+			break;
+		}
 		cout << "Doriti sa rulati o noua runda (Y)es/(N)o: ";
 		cin >> response;
 		if (response == 'N')
@@ -28,6 +35,7 @@ Game::Game()
 			break;
 		}
 		map->moveAgents();
+		ROUND++;
 	}
 }
 void Game::initializeAgents(Map &m)
