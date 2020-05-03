@@ -4,9 +4,11 @@
 #include "Agent.h"
 #include "AgentAsasin.h"
 #include "AgentHot.h"
+#include "AgentBrawler.h"
 #include "Item.h"
 #include "Medkit.h"
-#include "functii.h"
+#include "Stone.h"
+#include "Cloak.h"
 
 
 class Game
@@ -20,5 +22,7 @@ public:
 	void printGame();
 	void initializeAgents(Map &);
 	void initializeItems(Map &);
+	string randName();
+	int randInt(int,int);
 	~Game() { delete map; };
 };

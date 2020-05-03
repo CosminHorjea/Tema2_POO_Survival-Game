@@ -2,6 +2,8 @@
 #include <utility>
 #include "Engine.h"
 
+// #include "functii.h"
+
 
 using namespace std;
 
@@ -45,8 +47,9 @@ void Game::initializeAgents(Map &m)
 		case 2:
 			m.add_entity(new Thief(randName(),{randInt(1, m.getRows()), randInt(1, m.getColumns())}));
 			break;
-			// case 3:
-			// 	m.add_entity(new Agent);
+		case 0:
+			m.add_entity(new Brawler(randName(),{randInt(1,m.getRows()) , randInt(1,m.getColumns())}));
+			break;
 		}
 	}
 }
@@ -58,12 +61,22 @@ void Game::initializeItems(Map &m)
 		switch (i % 3)
 		{
 		case 1:
-			m.add_entity(new Medkit("Medicament", {randInt(1, m.getRows()), randInt(1, m.getColumns())}));
+			m.add_entity(new Medkit("Medicament", {this->randInt(1, m.getRows()), this->randInt(1, m.getColumns())}));
 			break;
-			// case 2:
-			// 	m.add_entity(new Agent);
-			// case 3:
-			// 	m.add_entity(new Agent);
+			case 2:
+				m.add_entity(new Stone("Piatra Fermecata", {this->randInt(1, m.getRows()), this->randInt(1, m.getColumns())}));
+			case 3:
+				m.add_entity(new Cloak("Mantia Agilitatii", {this->randInt(1, m.getRows()), this->randInt(1, m.getColumns())}));
 		}
 	}
+}
+string Game::randName(){
+	std::string names[20]={"Gwen","Trent","Geoff","DJ","Heather","Justin","Duncan","Harold","Courtney","Owen","Courtney","Beth","Duncan","Justin","Lindsay","Leshawna","Izzy","Dany","Casey","Chris"};
+
+	return(names[randInt(0,20)]);
+
+}
+int Game::randInt(int lower, int upper)
+{
+	return lower + rand() % (upper - lower);
 }

@@ -5,10 +5,10 @@ class Agent;
 
 class Item : public Entity
 {
-	int bonusAttack, bonusHealth;
+	int bonusAttack, bonusHealth,bonusAgility;
 
 public:
-	Item(string, pair<int, int>, int, int);
+	Item(string, pair<int, int>, int, int,int);
 	string getEntityType() const { return "Item"; };
 	virtual string getItemType() = 0;
 	virtual char getEntityChar() const = 0;
